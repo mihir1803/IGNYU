@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <title>Image</title>
+    <style>
+        .Submit {
+            background-color: #04AA6D;
+            color: white;
+            padding: 10px 30px;
+            margin: 0px 30px;
+            border: none;
+            cursor: pointer;
+            width: 30%;
+            opacity: 0.9;
+        }
+    </style>
+</head>
+{% extends 'base.html' %}
+{% block body_block %}
+<table style="width: 100%;" border="3">
+    <th colspan="6">Image Upload</th>
+    <tr>
+        <th>No.</th>
+        <th>Stundent Name</th>
+        <th>Discription</th>
+        <th>Image</th>
+        <th>Answer</th>
+        <th>Submit</th>
+    </tr>
+    {% for i in images %}
+    <form action="{% url 'imageshow' %}" method="post">
+        {% csrf_token %}
+        <tr>
+            <th>{{forloop.counter}}</th>
+            <!-- Student_name -->
+            <td>
+                <input type="hidden" value="{{ i.Student_name }}" name="stud_name">
+                {{ i.Student_name }}  
+                
+            </td>
+            <!-- Disc -->
+            <td>
+                <input type="hidden" name="img_disc" value="{{ i.Disc}}">
+                {{ i.Disc }}
+            </td>
+            <!-- attechment -->
+            <td>
+                <input type="hidden" name="image_attechment" value="{{ i.attechment.url}}">
+                <img src="{{ i.attechment.url }}">
+            </td>
+            <!-- Ans -->
+            <td>
+                <textarea name="answer" cols="30" rows="10"></textarea>
+            </td>
+            <td> <button class='Submit' type='submit' >SUBMIT</button> </td>
+        </tr>
+    </form>
+    {% endfor %}
+</table>
+{% endblock %}
+</html>

@@ -1,0 +1,84 @@
+<html>
+<head>
+    <title>Image</title>
+<style>
+      
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        }
+    
+        li {
+        float: left;
+        }
+    
+        li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        }
+    
+        /* Change the link color to #111 (black) on hover */
+        li a:hover {
+        background-color: #111;
+        }
+        input[type=text]{
+    
+            width:100%;
+            padding:15px;
+            margin : 5px 0 22px 0;
+            display : inline_block;
+            border:none;
+            }
+        input[type=phone]{
+            width:10%;
+            padding:5px;
+            margin:5px 0 22px 0;
+        }
+        input[type=file]{
+            width:20%;
+            margin:1px 20px 10px;
+            padding:5px 0
+        }
+</style>
+    
+</head>
+{% extends 'base.html' %}
+{% block body_block %}
+  
+<form action="{% url 'image' %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container">
+    <hr>
+    DISC : <br>
+    <textarea cols="30" rows= "10" value="disc" name = "text1" id = "text"> </textarea>
+    <br>
+    <label for="file">Upload Images</label>
+    <input type="file" name="attachment" class="form-control-file" id="file">
+    <br>
+    <button type="submit" class="submit">Submit</button>
+    
+
+    
+
+    </div>
+  
+    
+  </form>
+ <div>
+
+      {% comment %} <h1>Uploaded images</h1>
+      {% for image in images %}
+      
+        <a href="{{image.attechment.url}}"><img src="{{image.attechment.url}}"></a>
+      {% endfor %}
+    </div> 
+   {% endcomment %}
+   
+{% endblock%}
+</html>
